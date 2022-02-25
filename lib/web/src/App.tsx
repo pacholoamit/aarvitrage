@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Navbar, Hero, Exchange, Footer, ThemeToggle } from "./components";
+import { Navbar, Hero, Exchange, Footer } from "./components";
 
 const App: React.FC = () => {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
-      <ThemeToggle />
       <Navbar />
       <Hero />
       <Exchange />
