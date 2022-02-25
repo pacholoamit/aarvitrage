@@ -1,0 +1,13 @@
+{
+  "name": "aarvitrage",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:pacholoamit/aarvitrage.git",
+  "author": "pacholoamit <pacholoamit.tech@gmail.com>",
+  "scripts": {
+    
+    "start-web": "./scripts/start-web.sh"
+
+  },
+  "license": "MIT"
+}
