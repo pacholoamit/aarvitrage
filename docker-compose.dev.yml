@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  web:
+    container_name: "krypto-exchange-web"
+    build:
+      context: ./lib/web
+    ports:
+      - "3000:3000"
