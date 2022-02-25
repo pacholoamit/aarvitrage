@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { Button } from "@mantine/core";
+import { Navbar, Hero, Exchange, Footer } from "./components";
 
-function App() {
+const App: React.FC = () => {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
-      <Button>Hello</Button>
+      <Navbar />
+      <Hero />
+      <Exchange />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
