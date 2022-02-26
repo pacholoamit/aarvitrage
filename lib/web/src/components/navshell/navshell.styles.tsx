@@ -1,6 +1,8 @@
 import { NavshellStyles } from "./navshell.interface";
 
 const Styles: NavshellStyles = {
+  logoIcon: { width: 30, height: 30 },
+  
   icons: {
     width: 18,
     height: 18,

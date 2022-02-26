@@ -3,10 +3,11 @@ import {
   Header,
   ActionIcon,
   useMantineColorScheme,
-  Grid,
   Group,
+  Text,
+  Title,
 } from "@mantine/core";
-import { SunIcon, MoonIcon } from "@modulz/radix-icons";
+import { SunIcon, MoonIcon, DashboardIcon } from "@modulz/radix-icons";
 import Styles from "./navshell.styles";
 import React from "react";
 
@@ -29,10 +30,19 @@ const NavShell: React.FC = ({ children }) => {
     </ActionIcon>
   );
 
+  const Logo = (
+    <Group spacing={"xs"}>
+      <DashboardIcon style={Styles.logoIcon} />
+      <Title order={1} align="left">
+        Aarvitrage
+      </Title>
+    </Group>
+  );
+
   const HeaderComponents = (
-    <Header height={60} padding="xs">
+    <Header height={64} padding="xs">
       <Group position="apart">
-        {ThemeToggle}
+        {Logo}
         {ThemeToggle}
       </Group>
     </Header>

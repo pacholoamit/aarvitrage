@@ -3,6 +3,7 @@ import {
   MantineProvider,
   ColorSchemeProvider,
   ColorScheme,
+  MantineThemeOverride,
 } from "@mantine/core";
 
 const ThemeProvider: React.FC = ({ children }) => {
@@ -11,12 +12,19 @@ const ThemeProvider: React.FC = ({ children }) => {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
+  const theme: MantineThemeOverride = {
+    colorScheme,
+    headings: {
+      fontFamily: "Inter, sans-serif",
+    },
+  };
+
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
     >
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles>
+      <MantineProvider theme={theme} withGlobalStyles>
         {children}
       </MantineProvider>
     </ColorSchemeProvider>
