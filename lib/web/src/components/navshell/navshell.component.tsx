@@ -3,6 +3,8 @@ import {
   Header,
   ActionIcon,
   useMantineColorScheme,
+  Grid,
+  Group,
 } from "@mantine/core";
 import { SunIcon, MoonIcon } from "@modulz/radix-icons";
 import Styles from "./navshell.styles";
@@ -29,7 +31,10 @@ const NavShell: React.FC = ({ children }) => {
 
   const HeaderComponents = (
     <Header height={60} padding="xs">
-      {ThemeToggle}
+      <Group position="apart">
+        {ThemeToggle}
+        {ThemeToggle}
+      </Group>
     </Header>
   );
 
