@@ -1,13 +1,14 @@
-import { Navbar, Hero, Exchange, Footer } from "./components";
+import { Hero, Exchange, Footer, NavShell } from "./components";
 import "./App.css";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Navbar />
-      <Hero />
-      <Exchange />
-      <Footer />
+      <NavShell>
+        <Hero />
+        <Exchange />
+        <Footer />
+      </NavShell>
     </div>
   );
 };
