@@ -4,7 +4,6 @@ import {
   ActionIcon,
   useMantineColorScheme,
   Group,
-  Text,
   Title,
 } from "@mantine/core";
 import { SunIcon, MoonIcon, DashboardIcon } from "@modulz/radix-icons";
@@ -40,7 +39,7 @@ const NavShell: React.FC = ({ children }) => {
   );
 
   const HeaderComponents = (
-    <Header height={64} padding="xs">
+    <Header height={64} padding="md">
       <Group position="apart">
         {Logo}
         {ThemeToggle}
