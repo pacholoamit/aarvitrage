@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY package*.json yarn.lock ./
 
-RUN yarn install
+RUN yarn --network-timeout 1000000
 
-COPY . ./
+COPY . .
 
 EXPOSE 4000
 

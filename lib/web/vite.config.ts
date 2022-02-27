@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     https: false,
     hmr: {
-      host: "3000.code.arch-server.com",
+      host: "aarvitrage.arch-server.com",
       port: 443,
       protocol: "wss",
     },
