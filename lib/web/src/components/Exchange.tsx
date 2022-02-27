@@ -1,15 +1,15 @@
 import React from "react";
-import { Autocomplete } from "@mantine/core";
+import { Autocomplete, Group } from "@mantine/core";
 
 const Exchange: React.FC = () => {
   return (
-    <React.Fragment>
+    <Group position="center" direction="column">
       <Autocomplete
-        label="Your favorite framework/library"
-        placeholder="Pick one"
+        label="Find Arbitrage"
+        placeholder="BTC/USDT"
         data={["React", "Angular", "Svelte", "Vue"]}
       />
-    </React.Fragment>
+    </Group>
   );
 };
 
