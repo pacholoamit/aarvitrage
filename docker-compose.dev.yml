@@ -3,42 +3,12 @@ version: "3.0"
 services:
   web:
     container_name: "aarvitrage-web"
-    networks:
-      - proxy
     build:
       context: ./lib/web
-    
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.aarvitrage-web.entrypoints=http"
-      - "traefik.http.routers.aarvitrage-web.rule=Host(`aarvitrage.arch-server.com`)"
-      - "traefik.http.middlewares.aarvitrage-web-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.aarvitrage-web.middlewares=aarvitrage-web-https-redirect"
-      - "traefik.http.routers.aarvitrage-web-secure.entrypoints=https"
-      - "traefik.http.routers.aarvitrage-web-secure.rule=Host(`aarvitrage.arch-server.com`)"
-      - "traefik.http.routers.aarvitrage-web-secure.tls=true"
-      - "traefik.http.routers.aarvitrage-web-secure.service=aarvitrage-web"
-      - "traefik.http.services.aarvitrage-web.loadbalancer.server.port=3000"
-      - "traefik.docker.network=proxy"
+
   api:
     container_name: "aarvitrage-api"
     networks:
       - proxy
     build:
       context: ./lib/api
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.aarvitrage-api.entrypoints=http"
-      - "traefik.http.routers.aarvitrage-api.rule=Host(`aarvitrage-api.arch-server.com`)"
-      - "traefik.http.middlewares.aarvitrage-api-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.aarvitrage-api.middlewares=aarvitrage-api-https-redirect"
-      - "traefik.http.routers.aarvitrage-api-secure.entrypoints=https"
-      - "traefik.http.routers.aarvitrage-api-secure.rule=Host(`aarvitrage-api.arch-server.com`)"
-      - "traefik.http.routers.aarvitrage-api-secure.tls=true"
-      - "traefik.http.routers.aarvitrage-api-secure.service=aarvitrage-api"
-      - "traefik.http.services.aarvitrage-api.loadbalancer.server.port=4000"
-      - "traefik.docker.network=proxy"
-
-networks:
-  proxy:
-    external: true

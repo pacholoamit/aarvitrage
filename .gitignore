@@ -1,2 +1,6 @@
 node_modules
 .env
+
+# Personal docker config
+
+docker-compose.local.yml
