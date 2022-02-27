@@ -1,14 +1,17 @@
-FROM node:15.12.0
+FROM node:14-alpine
 
-WORKDIR /app
+ENV PORT 3000
+EXPOSE 3000
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+WORKDIR /usr/src/app
+COPY package*.json yarn.lock ./
 
-ADD . .
+RUN yarn --network-timeout 1000000
+COPY . .
 
-RUN npm install
+RUN yarn build
 
-ENTRYPOINT ["/entrypoint.sh"]
+HEALTHCHECK --start-period=30s \
+  CMD curl -f http://localhost:3000 || exit 1
 
-CMD ["npm", "run", "dev"]
+CMD yarn dev
