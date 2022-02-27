@@ -1,6 +1,6 @@
 import { ExchangeId } from 'ccxt';
 
-export class findTickersByExchange {
+export class CcxtDto {
   exchangeId: ExchangeId;
-  symbol: string;
+  symbols: string[];
 }

@@ -2,6 +2,7 @@ import * as ccxt from 'ccxt';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import type { ExchangeId, Exchange } from 'ccxt';
 import validateNotNull from 'src/utils/validateNotNull.util';
+import { CcxtDto } from './ccxt.dto';
 @Injectable()
 export class CcxtService {
   private readonly logger = new Logger(CcxtService.name);
@@ -11,7 +12,7 @@ export class CcxtService {
     return ccxt.exchanges;
   }
 
-  public async findAllMarketsByExchange(exchangeId: ExchangeId) {
+  public async findAllMarketsByExchange({ exchangeId }: CcxtDto) {
     const exchange: Exchange = new ccxt[exchangeId]();
     const markets = await this.validateResponse(
       exchange.fetchMarkets(),
@@ -20,7 +21,7 @@ export class CcxtService {
     return markets;
   }
 
-  public async findAllCurrenciesByExchange(exchangeId: ExchangeId) {
+  public async findAllCurrenciesByExchange({ exchangeId }: CcxtDto) {
     const exchange: Exchange = new ccxt[exchangeId]();
     const currencies = await this.validateResponse(
       exchange.fetchCurrencies(),
@@ -30,15 +31,11 @@ export class CcxtService {
     return currencies;
   }
 
-  public async findTickersByExchange(
-    exchangeId: ExchangeId,
-    symbols: string[],
-  ) {
-    console.log(typeof symbols);
+  public async findTickersByExchange({ exchangeId, symbols }: CcxtDto) {
     const exchange = new ccxt[exchangeId]();
     const tickers = await this.validateResponse(
       exchange.fetchTickers(symbols),
-      'tickers',
+      `${symbols} tickers`,
     );
 
     return tickers;

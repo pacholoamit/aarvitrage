@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CcxtService } from './ccxt.service';
-
 import type { ExchangeId } from 'ccxt';
+import { CcxtService } from './ccxt.service';
+import { CcxtDto } from './ccxt.dto';
 
 @Controller('ccxt')
 export class CcxtController {
   constructor(private readonly ccxtService: CcxtService) {}
 
   @Get('markets')
-  async findAllMarketsByExchange(@Body('exchangeId') exchangeId: ExchangeId) {
-    return await this.ccxtService.findAllMarketsByExchange(exchangeId);
+  async findAllMarketsByExchange(@Body() ccxtDto: CcxtDto) {
+    return await this.ccxtService.findAllMarketsByExchange(ccxtDto);
   }
 
   @Get('exchanges')
@@ -18,17 +18,12 @@ export class CcxtController {
   }
 
   @Post('currencies')
-  async findAllCurrenciesByExchange(
-    @Body('exchangeId') exchangeId: ExchangeId,
-  ) {
-    return await this.ccxtService.findAllCurrenciesByExchange(exchangeId);
+  async findAllCurrenciesByExchange(@Body() ccxtDto: CcxtDto) {
+    return await this.ccxtService.findAllCurrenciesByExchange(ccxtDto);
   }
 
   @Post('tickers')
-  async findTickersByExchange(
-    @Body('exchangeId') exchangeId: ExchangeId,
-    @Body('symbols') symbols: string[],
-  ) {
-    return await this.ccxtService.findTickersByExchange(exchangeId, symbols);
+  async findTickersByExchange(@Body() ccxtDto: CcxtDto) {
+    return await this.ccxtService.findTickersByExchange(ccxtDto);
   }
 }
