@@ -13,7 +13,7 @@ export class CcxtController {
   }
 
   @Get('markets/:exchangeId')
-  getAllMarkets(@Param('exchangeId') exchangeId: ExchangeId) {
-    return this.ccxtService.getAllMarkets(exchangeId);
+  async getAllMarkets(@Param('exchangeId') exchangeId: ExchangeId) {
+    return await this.ccxtService.findMarketByExchange(exchangeId);
   }
 }

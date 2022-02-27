@@ -4,17 +4,17 @@ import * as ccxt from 'ccxt';
 
 @Injectable()
 export class CcxtService {
-  public getAllExchanges(): string[] {
+  public getAllExchanges() {
     return ccxt.exchanges;
   }
 
-  public async getAllMarkets(exchangeId: ExchangeId) {
-    const exchange: Exchange = new ccxt[exchangeId]();
-
-    if (exchange === undefined)
-      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-
-    const markets = await exchange.loadMarkets();
-    return markets
+  public async findMarketByExchange(exchangeId: ExchangeId) {
+    try {
+      const exchange: Exchange = new ccxt[exchangeId]();
+      const markets = await exchange.loadMarkets();
+      return markets;
+    } catch (err) {
+      throw new HttpException('Exchange not found', HttpStatus.NOT_FOUND);
+    }
   }
 }
