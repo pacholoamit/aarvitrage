@@ -1,25 +1,29 @@
 import React from "react";
-import axios from "axios";
 import { Autocomplete, Button, Group } from "@mantine/core";
-import { useQuery } from "../hooks";
+import { ApiContext } from "../providers";
+import { ApiContextType } from "../common/types";
 
 const Exchange: React.FC = () => {
-  const runQuery = () => {
-    const { response } = useQuery(
-      axios.get("https://aarvitrage-api.arch-server.com/app")
-    );
-
-    console.log(response);
-  };
+  const { setAarvitragePair, requestAarvitragePair } = React.useContext(
+    ApiContext
+  ) as ApiContextType;
 
   return (
     <Group position="center" direction="column">
       <Autocomplete
         label="Select Trade pair"
         placeholder="BTC/USDT"
-        data={["React", "Angular", "Svelte", "Vue"]}
+        data={["BTC/USDT"]}
+        name="symbols"
+        onChange={setAarvitragePair}
       />
-      <Button onClick={runQuery}> Find arbitrage</Button>
+      <Button
+        variant="gradient"
+        gradient={{ from: "indigo", to: "cyan" }}
+        onClick={requestAarvitragePair}
+      >
+        Find arbitrage
+      </Button>
     </Group>
   );
 };

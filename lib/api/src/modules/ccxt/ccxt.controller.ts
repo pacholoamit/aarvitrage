@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import type { ExchangeId } from 'ccxt';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CcxtService } from './ccxt.service';
 import { CcxtDto } from './ccxt.dto';
 

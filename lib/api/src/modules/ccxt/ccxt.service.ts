@@ -1,7 +1,7 @@
 import * as ccxt from 'ccxt';
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import type { ExchangeId, Exchange } from 'ccxt';
 import validateNotNull from 'src/utils/validateNotNull.util';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import type { Exchange } from 'ccxt';
 import { CcxtDto } from './ccxt.dto';
 @Injectable()
 export class CcxtService {
