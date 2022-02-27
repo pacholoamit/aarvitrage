@@ -5,5 +5,6 @@ import { CcxtService } from './ccxt.service';
 @Module({
   controllers: [CcxtController],
   providers: [CcxtService],
+  exports: [CcxtService],
 })
 export class CcxtModule {}

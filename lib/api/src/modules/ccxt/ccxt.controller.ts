@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CcxtService } from './ccxt.service';
 
 import type { ExchangeId } from 'ccxt';
@@ -12,8 +12,15 @@ export class CcxtController {
     return this.ccxtService.getAllExchanges();
   }
 
+  @Get('currencies/:exchangeId')
+  async findAllCurrenciesByExchange(
+    @Param('exchangeId') exchangeId: ExchangeId,
+  ) {
+    return await this.ccxtService.findCurrenciesByExchange(exchangeId);
+  }
+
   @Get('markets/:exchangeId')
-  async getAllMarkets(@Param('exchangeId') exchangeId: ExchangeId) {
-    return await this.ccxtService.findMarketByExchange(exchangeId);
+  async findAllMarketsByExchange(@Param('exchangeId') exchangeId: ExchangeId) {
+    return await this.ccxtService.findMarketsByExchange(exchangeId);
   }
 }
