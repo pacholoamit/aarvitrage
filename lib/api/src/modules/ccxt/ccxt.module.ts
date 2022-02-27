@@ -6,5 +6,6 @@ import { CcxtService } from './ccxt.service';
   controllers: [CcxtController],
   providers: [CcxtService],
   exports: [CcxtService],
+  imports: [],
 })
 export class CcxtModule {}

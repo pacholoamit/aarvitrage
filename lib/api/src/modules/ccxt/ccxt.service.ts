@@ -1,39 +1,59 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import type { ExchangeId, Exchange } from 'ccxt';
 import * as ccxt from 'ccxt';
-
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import type { ExchangeId, Exchange } from 'ccxt';
+import validateNotNull from 'src/utils/validateNotNull.util';
 @Injectable()
 export class CcxtService {
+  private readonly logger = new Logger(CcxtService.name);
+
   public getAllExchanges() {
+    this.logger.log('Exchanges fetched successfully');
     return ccxt.exchanges;
   }
 
-  public async findMarketsByExchange(exchangeId: ExchangeId) {
-    try {
-      const exchange: Exchange = new ccxt[exchangeId]();
-      const markets = await exchange.fetchMarkets();
-      return markets;
-    } catch (err) {
-      throw new HttpException(
-        'Exchange not found / Market not found',
-        HttpStatus.NOT_FOUND,
-      );
-    }
+  public async findAllMarketsByExchange(exchangeId: ExchangeId) {
+    const exchange: Exchange = new ccxt[exchangeId]();
+    const markets = await this.validateResponse(
+      exchange.fetchMarkets(),
+      `${exchangeId} markets`,
+    );
+    return markets;
   }
 
-  public async findCurrenciesByExchange(exchangeId: ExchangeId) {
+  public async findAllCurrenciesByExchange(exchangeId: ExchangeId) {
+    const exchange: Exchange = new ccxt[exchangeId]();
+    const currencies = await this.validateResponse(
+      exchange.fetchCurrencies(),
+      `${exchangeId} currency`,
+    );
+
+    return currencies;
+  }
+
+  public async findTickersByExchange(
+    exchangeId: ExchangeId,
+    symbols: string[],
+  ) {
+    console.log(typeof symbols);
+    const exchange = new ccxt[exchangeId]();
+    const tickers = await this.validateResponse(
+      exchange.fetchTickers(symbols),
+      'tickers',
+    );
+
+    return tickers;
+  }
+
+  private async validateResponse(promise: Promise<any>, ctx: string) {
     try {
-      const exchange: Exchange = new ccxt[exchangeId]();
-      const currencies = await exchange.fetchCurrencies();
-      if (currencies === undefined)
-        throw new HttpException(
-          'Exchange not found / Currency not found',
-          HttpStatus.NOT_FOUND,
-        );
-      return currencies;
+      const resolve = await promise;
+      validateNotNull(resolve, ctx);
+      this.logger.log(`${ctx} fetched Successfully`);
+      return resolve;
     } catch (err) {
+      this.logger.error(err.message);
       throw new HttpException(
-        'Exchange not found / Currency not found',
+        `${ctx ?? 'value'} not found`,
         HttpStatus.NOT_FOUND,
       );
     }
