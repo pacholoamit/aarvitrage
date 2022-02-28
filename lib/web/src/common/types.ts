@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 export type ApiContextType = {
-  aarvitragePair?: string;
-  setAarvitragePair?: React.Dispatch<React.SetStateAction<string>>;
-  requestAarvitragePair: () => Promise<AxiosResponse<any, any>>;
+  arbitragePair?: string;
+  setArbitragePair?: React.Dispatch<React.SetStateAction<string>>;
+  requestArbitragePair: () => Promise<AxiosResponse<any, any>>;
 };

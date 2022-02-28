@@ -3,6 +3,7 @@ import validateNotNull from 'src/utils/validateNotNull.util';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import type { Exchange } from 'ccxt';
 import { CcxtDto } from './ccxt.dto';
+import { runPromise } from 'src/utils';
 @Injectable()
 export class CcxtService {
   private readonly logger = new Logger(CcxtService.name);
@@ -31,14 +32,20 @@ export class CcxtService {
     return currencies;
   }
 
-  public async findTickersByExchange({ exchangeId, symbols }: CcxtDto) {
+  public async findTickersByExchange({ exchangeId, tradePair }: CcxtDto) {
     const exchange = new ccxt[exchangeId]();
-    const tickers = await this.validateResponse(
-      exchange.fetchTickers(symbols),
-      `${symbols} tickers`,
-    );
+    const context = `${exchangeId} ${tradePair}`;
 
-    return tickers;
+    const [tickers, error] = await runPromise(exchange.fetchTicker(tradePair));
+
+    if (error) {
+      this.logger.error(error);
+      // throw new HttpException(`${context} not found`, HttpStatus.NOT_FOUND);
+    }
+
+    this.logger.log(`${context} fetched succesfully`);
+
+    return tickers as ccxt.Ticker;
   }
 
   private async validateResponse(promise: Promise<any>, ctx: string) {

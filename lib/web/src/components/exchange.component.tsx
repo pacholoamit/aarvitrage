@@ -4,7 +4,7 @@ import { ApiContext } from "../providers";
 import { ApiContextType } from "../common/types";
 
 const Exchange: React.FC = () => {
-  const { setAarvitragePair, requestAarvitragePair } = React.useContext(
+  const { setArbitragePair, requestArbitragePair } = React.useContext(
     ApiContext
   ) as ApiContextType;
 
@@ -15,12 +15,12 @@ const Exchange: React.FC = () => {
         placeholder="BTC/USDT"
         data={["BTC/USDT"]}
         name="symbols"
-        onChange={setAarvitragePair}
+        onChange={setArbitragePair}
       />
       <Button
         variant="gradient"
         gradient={{ from: "indigo", to: "cyan" }}
-        onClick={requestAarvitragePair}
+        onClick={requestArbitragePair}
       >
         Find arbitrage
       </Button>

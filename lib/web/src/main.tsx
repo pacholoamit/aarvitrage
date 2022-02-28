@@ -5,11 +5,11 @@ import { ApiProvider, ThemeProvider } from "./providers";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <ApiProvider>
+    <ApiProvider>
+      <ThemeProvider>
         <App />
-      </ApiProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </ApiProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

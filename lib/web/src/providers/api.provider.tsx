@@ -1,32 +1,27 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { ApiContextType } from "../common/types";
 
 const ApiContext = React.createContext<ApiContextType | null>(null);
 
 const ApiProvider: React.FC = ({ children }) => {
-  const [aarvitragePair, setAarvitragePair] = React.useState("");
+  const [arbitragePair, setArbitragePair] = React.useState("");
 
-  useEffect(() => {
-    console.log(aarvitragePair);
-  }, [aarvitragePair]);
-
-  const requestAarvitragePair = async () => {
+  const requestArbitragePair = async () => {
     const ticker = await axios.post(
-      "https://aarvitrage-api.arch-server.com/ccxt/tickers",
+      "https://aarvitrage-api.arch-server.com/arbitrage/pairs",
       {
-        exchangeId: "binance",
-        symbols: aarvitragePair,
+        tradePair: "hello",
       }
     );
-    console.log(ticker);
+    console.log(ticker.data);
     return ticker.data;
   };
   return (
     <ApiContext.Provider
       value={{
-        setAarvitragePair,
-        requestAarvitragePair,
+        setArbitragePair,
+        requestArbitragePair,
       }}
     >
       {children}
