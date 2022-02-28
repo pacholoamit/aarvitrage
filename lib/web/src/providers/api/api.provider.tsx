@@ -1,8 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { ApiContextType } from "../common/types";
-
-const ApiContext = React.createContext<ApiContextType | null>(null);
+import ApiContext from "./api.context";
 
 const ApiProvider: React.FC = ({ children }) => {
   const [arbitragePair, setArbitragePair] = React.useState("");
@@ -11,7 +9,7 @@ const ApiProvider: React.FC = ({ children }) => {
     const ticker = await axios.post(
       "https://aarvitrage-api.arch-server.com/arbitrage/pairs",
       {
-        tradePair: "hello",
+        tradePair: arbitragePair,
       }
     );
     console.log(ticker.data);
@@ -29,4 +27,4 @@ const ApiProvider: React.FC = ({ children }) => {
   );
 };
 
-export { ApiContext, ApiProvider };
+export default ApiProvider;
