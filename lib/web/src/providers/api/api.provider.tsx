@@ -4,6 +4,7 @@ import ApiContext from "./api.context";
 
 const ApiProvider: React.FC = ({ children }) => {
   const [arbitragePair, setArbitragePair] = React.useState("");
+  const [arbitragePairResult, setArbitragePairResult] = React.useState(null);
 
   const requestArbitragePair = async () => {
     const ticker = await axios.post(
@@ -12,13 +13,16 @@ const ApiProvider: React.FC = ({ children }) => {
         tradePair: arbitragePair,
       }
     );
-    console.log(ticker.data);
-    return ticker.data;
+    //Note: Add localstorage cache
+    setArbitragePairResult(ticker.data);
   };
   return (
     <ApiContext.Provider
       value={{
+        arbitragePair,
         setArbitragePair,
+        arbitragePairResult,
+        setArbitragePairResult,
         requestArbitragePair,
       }}
     >
