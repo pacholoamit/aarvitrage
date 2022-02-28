@@ -10,17 +10,22 @@ export class ArbitrageService {
   public async getTradePairArbitrage(tradePair: string) {
     const exchanges = this.ccxtService.getAllExchanges();
 
-    const getAllPrices = exchanges.map(async (exchangeId: ExchangeId) => {
+    const allPrices = exchanges.map(async (exchangeId: ExchangeId) => {
       const ticker = await this.ccxtService.findTickersByExchange({
         exchangeId,
         tradePair,
       });
       const { symbol, last } = ticker;
-      this.logger.log({ exchangeId, tradePair: symbol, price: last });
       return { exchangeId, tradePair: symbol, price: last }; // Note: This only works for 1 trade pair for now
     });
 
-    const result = await Promise.allSettled(getAllPrices);
-    return result;
+    const fulfilledPrices = (await Promise.allSettled(allPrices))
+      .filter(({ status }) => status === 'fulfilled')
+      .map((fulfilled) => <PromiseFulfilledResult<any>>fulfilled) // Assert type is Promise fulfilled to get value
+      .map((fulfilled) => fulfilled.value);
+
+    this.logger.log(`${fulfilledPrices.length} ${tradePair} trade pairs.`);
+
+    return fulfilledPrices;
   }
 }
