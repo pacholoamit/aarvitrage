@@ -25,7 +25,11 @@ export class ArbitrageService {
     const fulfilledPrices = (await Promise.allSettled(allPrices))
       .filter(({ status }) => status === 'fulfilled')
       .map((fulfilled) => <PromiseFulfilledResult<ArbitrageInfo>>fulfilled) // Assert type is Promise fulfilled to get value
-      .map((fulfilled) => fulfilled.value);
+      .map((fulfilled) => fulfilled.value)
+      .filter(
+        ({ price, timestamp }) =>
+          price !== undefined && timestamp !== undefined,
+      );
 
     this.logger.log(`${fulfilledPrices.length} ${tradePair} trade pairs.`);
 
