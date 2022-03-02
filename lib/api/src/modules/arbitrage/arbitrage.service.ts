@@ -22,6 +22,7 @@ export class ArbitrageService {
       },
     );
 
+    // TODO: Optimize this
     const fulfilledPrices = (await Promise.allSettled(allPrices))
       .filter(({ status }) => status === 'fulfilled')
       .map((fulfilled) => <PromiseFulfilledResult<ArbitrageInfo>>fulfilled) // Assert type is Promise fulfilled to get value

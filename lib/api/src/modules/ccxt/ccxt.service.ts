@@ -40,7 +40,6 @@ export class CcxtService {
 
     if (error) {
       this.logger.error(error);
-      // throw new HttpException(`${context} not found`, HttpStatus.NOT_FOUND);
     }
 
     this.logger.log(`${context} fetched succesfully`);

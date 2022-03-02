@@ -49,12 +49,20 @@ const NavShell: React.FC = ({ children }) => {
     </ActionIcon>
   );
 
+  // TODO: Make Header component responsive
+
   const HeaderComponents = (
     <Header height={64} padding="md">
       <Grid justify={"space-between"} align={"center"}>
-        <Grid.Col span={3}>{Logo}</Grid.Col>
-        <Grid.Col span={3}>{Menu}</Grid.Col>
-        <Grid.Col span={3}>{ThemeToggle}</Grid.Col>
+        <Grid.Col lg={3} md={3}>
+          {Logo}
+        </Grid.Col>
+        <Grid.Col lg={3} md={3}>
+          {Menu}
+        </Grid.Col>
+        <Grid.Col lg={3} md={3}>
+          {ThemeToggle}
+        </Grid.Col>
       </Grid>
     </Header>
   );
