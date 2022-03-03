@@ -10,10 +10,12 @@ export class CcxtService {
 
   public getAllExchanges() {
     this.logger.log('Exchanges fetched successfully');
-    return ccxt.exchanges;
+
+    return { names: ccxt.exchanges };
   }
 
   public async findAllMarketsByExchange({ exchangeId }: CcxtDto) {
+    console.log(exchangeId);
     const exchange: Exchange = new ccxt[exchangeId]();
     const markets = await this.validateResponse(
       exchange.fetchMarkets(),

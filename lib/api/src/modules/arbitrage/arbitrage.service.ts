@@ -9,9 +9,9 @@ export class ArbitrageService {
   private readonly logger = new Logger(ArbitrageService.name);
 
   public async getTradePairArbitrage(tradePair: string) {
-    const exchanges = this.ccxtService.getAllExchanges();
+    const { names } = this.ccxtService.getAllExchanges();
 
-    const allPrices = exchanges.map(
+    const allPrices = names.map(
       async (exchangeId: ExchangeId): Promise<ArbitrageInfo> => {
         const ticker = await this.ccxtService.findTickersByExchange({
           exchangeId,

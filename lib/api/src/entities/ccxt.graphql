@@ -1,0 +1,7 @@
+type ExchangeIds {
+  names: [String]
+}
+
+type Query {
+  exchanges: ExchangeIds
+}
