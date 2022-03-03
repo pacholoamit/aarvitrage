@@ -4,27 +4,34 @@ import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import type { Exchange } from 'ccxt';
 import { CcxtDto } from './ccxt.dto';
 import { runPromise } from 'src/utils';
+import {
+  CcxtMarket,
+  EnumExchangeId,
+  ExchangeIds,
+} from 'src/entities/ccxt.entities';
+
 @Injectable()
 export class CcxtService {
   private readonly logger = new Logger(CcxtService.name);
 
-  public getAllExchanges() {
+  public getAllExchanges(): EnumExchangeId[] {
     this.logger.log('Exchanges fetched successfully');
-
-    return { names: ccxt.exchanges };
+    return ccxt.exchanges as unknown as EnumExchangeId[];
   }
 
-  public async findAllMarketsByExchange({ exchangeId }: CcxtDto) {
-    console.log(exchangeId);
+  public async findAllMarketsByExchange(
+    exchangeId: EnumExchangeId,
+  ): Promise<CcxtMarket[]> {
     const exchange: Exchange = new ccxt[exchangeId]();
     const markets = await this.validateResponse(
       exchange.fetchMarkets(),
       `${exchangeId} markets`,
     );
+
     return markets;
   }
 
-  public async findAllCurrenciesByExchange({ exchangeId }: CcxtDto) {
+  public async findAllCurrenciesByExchange(exchangeId: EnumExchangeId) {
     const exchange: Exchange = new ccxt[exchangeId]();
     const currencies = await this.validateResponse(
       exchange.fetchCurrencies(),

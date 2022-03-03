@@ -1,0 +1,160 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CcxtMarket {
+  active: Boolean
+  base: String!
+  baseId: String!
+  contract: Boolean
+  contractSize: Float
+  expiry: Float
+  expiryDatetime: String
+  feeSide: String
+  future: Boolean
+  id: String!
+  info: String!
+  inverse: Boolean
+  linear: Boolean
+  maker: Float
+  margin: Boolean
+  option: Boolean
+  optionType: String
+  percentage: Boolean
+  quote: String!
+  quoteId: String!
+  settle: String
+  settleId: String
+  spot: Boolean
+  strike: Float
+  swap: Boolean
+  symbol: String!
+  taker: Float
+  tierBased: Boolean
+  type: String
+}
+
+type Query {
+  getAllExchanges: [EnumExchangeId!]!
+  findAllMarketsByExchange(exchangeId: EnumExchangeId!): [CcxtMarket!]!
+}
+
+enum EnumExchangeId {
+  aax
+  ascendex
+  bequant
+  bibox
+  bigone
+  binance
+  binancecoinm
+  binanceus
+  binanceusdm
+  bit2c
+  bitbank
+  bitbay
+  bitbns
+  bitcoincom
+  bitfinex
+  bitfinex2
+  bitflyer
+  bitforex
+  bitget
+  bithumb
+  bitmart
+  bitmex
+  bitpanda
+  bitrue
+  bitso
+  bitstamp
+  bitstamp1
+  bittrex
+  bitvavo
+  bl3p
+  blockchaincom
+  btcalpha
+  btcbox
+  btcmarkets
+  btctradeua
+  btcturk
+  buda
+  bw
+  bybit
+  bytetrade
+  cdax
+  cex
+  coinbase
+  coinbaseprime
+  coinbasepro
+  coincheck
+  coinex
+  coinfalcon
+  coinmate
+  coinone
+  coinspot
+  crex24
+  cryptocom
+  currencycom
+  delta
+  deribit
+  digifinex
+  eqonex
+  equos
+  exmo
+  flowbtc
+  fmfwio
+  ftx
+  ftxus
+  gateio
+  gemini
+  hitbtc
+  hitbtc3
+  hollaex
+  huobi
+  huobijp
+  huobipro
+  idex
+  independentreserve
+  indodax
+  itbit
+  kraken
+  kucoin
+  kucoinfutures
+  kuna
+  latoken
+  lbank
+  liquid
+  luno
+  lykke
+  mercado
+  mexc
+  ndax
+  novadax
+  oceanex
+  okcoin
+  okex
+  okex5
+  okx
+  paymium
+  phemex
+  poloniex
+  probit
+  qtrade
+  ripio
+  stex
+  therock
+  tidebit
+  tidex
+  timex
+  upbit
+  vcc
+  wavesexchange
+  wazirx
+  whitebit
+  woo
+  xena
+  yobit
+  zaif
+  zb
+  zipmex
+  zonda
+}

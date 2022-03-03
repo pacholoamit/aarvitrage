@@ -1,10 +1,10 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ArbitrageModule } from './modules/arbitrage/arbitrage.module';
+// import { ArbitrageModule } from './modules/arbitrage/arbitrage.module';
 import { CcxtModule } from './modules/ccxt/ccxt.module';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { CoinsModule } from './modules/coins/coins.module';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -12,11 +12,10 @@ import { CoinsModule } from './modules/coins/coins.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      typePaths: ['./**/*.graphql'],
+      autoSchemaFile: join(process.cwd(), 'src/entities/schema.gql'),
     }),
     CcxtModule,
-    ArbitrageModule,
-    CoinsModule,
+    // ArbitrageModule,
   ],
 })
 export class AppModule {}

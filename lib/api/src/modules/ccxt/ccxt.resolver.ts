@@ -1,20 +1,27 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import {
+  CcxtMarket,
+  EnumExchangeId,
+  ExchangeIds,
+} from 'src/entities/ccxt.entities';
 import { CcxtService } from './ccxt.service';
-// import { CreateCoinInput } from './dto/create-coin.input';
 
 @Resolver('Ccxt')
 export class CcxtResolver {
   constructor(private readonly ccxtService: CcxtService) {}
 
-  @Query('exchanges')
-  create() {
+  @Query(() => [EnumExchangeId])
+  getAllExchanges(): EnumExchangeId[] {
     return this.ccxtService.getAllExchanges();
   }
 
-  //   @Query('coins')
-  //   findAll() {
-  //     return this.coinsService.findAll();
-  //   }
+  @Query(() => [CcxtMarket])
+  async findAllMarketsByExchange(
+    @Args('exchangeId', { type: () => EnumExchangeId })
+    exchangeId: EnumExchangeId,
+  ): Promise<CcxtMarket[]> {
+    return await this.ccxtService.findAllMarketsByExchange(exchangeId);
+  }
 
   //   @Query('coin')
   //   findOne(@Args('id') id: number) {
