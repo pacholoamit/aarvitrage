@@ -13,7 +13,6 @@ type CcxtMarket {
   feeSide: String
   future: Boolean
   id: String!
-  info: String!
   inverse: Boolean
   linear: Boolean
   maker: Float
@@ -35,8 +34,8 @@ type CcxtMarket {
 }
 
 type Query {
-  getAllExchanges: [EnumExchangeId!]!
-  findAllMarketsByExchange(exchangeId: EnumExchangeId!): [CcxtMarket!]!
+  exchanges: [EnumExchangeId!]!
+  markets(exchangeId: EnumExchangeId!): [CcxtMarket!]!
 }
 
 enum EnumExchangeId {

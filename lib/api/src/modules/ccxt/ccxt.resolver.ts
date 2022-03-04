@@ -11,12 +11,12 @@ export class CcxtResolver {
   constructor(private readonly ccxtService: CcxtService) {}
 
   @Query(() => [EnumExchangeId])
-  getAllExchanges(): EnumExchangeId[] {
+  exchanges(): EnumExchangeId[] {
     return this.ccxtService.getAllExchanges();
   }
 
   @Query(() => [CcxtMarket])
-  async findAllMarketsByExchange(
+  async markets(
     @Args('exchangeId', { type: () => EnumExchangeId })
     exchangeId: EnumExchangeId,
   ): Promise<CcxtMarket[]> {
