@@ -4,7 +4,11 @@ import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import type { Exchange } from 'ccxt';
 import { CcxtDto } from './ccxt.dto';
 import { runPromise } from 'src/utils';
-import { CcxtMarket, EnumExchangeId } from 'src/entities/ccxt.entities';
+import {
+  CcxtCurrency,
+  CcxtMarket,
+  EnumExchangeId,
+} from 'src/entities/ccxt.entities';
 
 @Injectable()
 export class CcxtService {
@@ -27,13 +31,15 @@ export class CcxtService {
     return markets;
   }
 
-  public async findAllCurrenciesByExchange(exchangeId: EnumExchangeId) {
+  public async findAllCurrenciesByExchange(
+    exchangeId: EnumExchangeId,
+  ): Promise<CcxtCurrency> {
     const exchange: Exchange = new ccxt[exchangeId]();
     const currencies = await this.validateResponse(
       exchange.fetchCurrencies(),
       `${exchangeId} currency`,
     );
-
+    console.log(currencies);
     return currencies;
   }
 

@@ -1,5 +1,5 @@
 import { Field, Float, ObjectType, registerEnumType } from '@nestjs/graphql';
-import type { Market, MinMax } from 'ccxt';
+import type { Currency, Market, MinMax } from 'ccxt';
 
 export enum EnumExchangeId {
   aax = 'aax',
@@ -129,7 +129,7 @@ export class ExchangeIds {
 
 @ObjectType()
 export class CcxtMarket implements Market {
-  info: JSON; // TODO: CHANGE THIS
+  info: JSON; // Note: Not in schema
   @Field({ nullable: true })
   active?: boolean;
   @Field()
@@ -150,7 +150,6 @@ export class CcxtMarket implements Market {
   future?: boolean;
   @Field()
   id: string;
-
   @Field({ nullable: true })
   inverse?: boolean;
   @Field({ nullable: true })
@@ -209,6 +208,18 @@ export class MarketLimit {
   leverage?: MinMax;
   @Field(() => Float, { nullable: true })
   price?: MinMax;
+}
+
+@ObjectType()
+export class CcxtCurrency implements Currency {
+  @Field({ nullable: true })
+  code: string;
+  @Field()
+  id: string;
+  @Field(() => Float, { nullable: true })
+  numericId?: number;
+  @Field(() => Float)
+  precision: number;
 }
 
 registerEnumType(EnumExchangeId, {

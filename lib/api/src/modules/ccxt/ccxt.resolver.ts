@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import {
+  CcxtCurrency,
   CcxtMarket,
   EnumExchangeId,
-  ExchangeIds,
 } from 'src/entities/ccxt.entities';
 import { CcxtService } from './ccxt.service';
 
@@ -21,5 +21,13 @@ export class CcxtResolver {
     exchangeId: EnumExchangeId,
   ): Promise<CcxtMarket[]> {
     return await this.ccxtService.findAllMarketsByExchange(exchangeId);
+  }
+
+  @Query(() => CcxtCurrency)
+  async currencies(
+    @Args('exchangeId', { type: () => EnumExchangeId })
+    exchangeId: EnumExchangeId,
+  ): Promise<CcxtCurrency> {
+    return await this.ccxtService.findAllCurrenciesByExchange(exchangeId);
   }
 }

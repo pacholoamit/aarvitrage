@@ -33,9 +33,17 @@ type CcxtMarket {
   type: String
 }
 
+type CcxtCurrency {
+  code: String
+  id: String!
+  numericId: Float
+  precision: Float!
+}
+
 type Query {
   exchanges: [EnumExchangeId!]!
   markets(exchangeId: EnumExchangeId!): [CcxtMarket!]!
+  currencies(exchangeId: EnumExchangeId!): CcxtCurrency!
 }
 
 enum EnumExchangeId {
