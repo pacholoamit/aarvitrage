@@ -1,5 +1,4 @@
 import * as ccxt from 'ccxt';
-import validateNotNull from 'src/utils/validateNotNull.util';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { CcxtDto } from './ccxt.dto';
 import { handlePromise } from 'src/utils';

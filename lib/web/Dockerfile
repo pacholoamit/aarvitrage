@@ -1,6 +1,5 @@
 FROM node:lts-alpine3.15
 
-ENV PORT 3000
 
 WORKDIR /app
 
@@ -10,6 +9,6 @@ RUN yarn --network-timeout 1000000
 
 COPY . .
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
 CMD ["yarn", "run", "dev"]
