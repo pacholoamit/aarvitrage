@@ -6,14 +6,14 @@ import { CcxtDto } from './ccxt.dto';
 export class CcxtController {
   constructor(private readonly ccxtService: CcxtService) {}
 
-  @Get('markets')
-  async findAllMarketsByExchange(@Body() ccxtDto: CcxtDto) {
-    return await this.ccxtService.findAllMarketsByExchange(ccxtDto);
-  }
-
   @Get('exchanges')
   getAllExchanges() {
     return this.ccxtService.getAllExchanges();
+  }
+
+  @Post('markets')
+  async findAllMarketsByExchange(@Body() ccxtDto: CcxtDto) {
+    return await this.ccxtService.findAllMarketsByExchange(ccxtDto);
   }
 
   @Post('currencies')
@@ -21,8 +21,8 @@ export class CcxtController {
     return await this.ccxtService.findAllCurrenciesByExchange(ccxtDto);
   }
 
-  @Post('tickers')
-  async findTickersByExchange(@Body() ccxtDto: CcxtDto) {
-    return await this.ccxtService.findTickersByExchange(ccxtDto);
+  @Post('ticker')
+  async findTickerByExchange(@Body() ccxtDto: CcxtDto) {
+    return await this.ccxtService.findTickerByExchange(ccxtDto);
   }
 }

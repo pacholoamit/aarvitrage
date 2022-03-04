@@ -13,7 +13,7 @@ export class ArbitrageService {
 
     const allPrices = exchanges.map(
       async (exchangeId: ExchangeId): Promise<ArbitrageInfo> => {
-        const ticker = await this.ccxtService.findTickersByExchange({
+        const ticker = await this.ccxtService.findTickerByExchange({
           exchangeId,
           tradePair,
         });

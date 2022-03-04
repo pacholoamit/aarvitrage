@@ -1,25 +1,30 @@
 version: "3.0"
 
-volumes:
-  api_node_modules:
-  web_node_modules:
 services:
   web:
-    container_name: "aarvitrage-web"
+    container_name: aarvitrage-web
     ports:
       - 3000:3000
     build:
       context: ./lib/web
     volumes:
       - ./lib/web:/app
-      - web_node_modules:/app/node_modules
 
   api:
-    container_name: "aarvitrage-api"
+    container_name: aarvitrage-api
     ports:
       - 4000:4000
     build:
       context: ./lib/api
     volumes:
       - ./lib/api:/app
-      - api_node_modules:/app/node_modules
+
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: aarvitrage
+      POSTGRES_PASSWORD: aarvitrage
+      POSTGRES_DB: aarvitrage

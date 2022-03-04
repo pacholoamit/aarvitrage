@@ -1,4 +1,4 @@
-const runPromise = async (promise: Promise<any>) => {
+const handlePromise = async (promise: Promise<any>) => {
   try {
     const data = await promise;
     return [data, null];
@@ -7,4 +7,4 @@ const runPromise = async (promise: Promise<any>) => {
   }
 };
 
-export default runPromise;
+export default handlePromise;
