@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ArbitrageModule } from './modules/arbitrage/arbitrage.module';
-import { CcxtModule } from './modules/ccxt/ccxt.module';
+import { ArbitrageModule } from './arbitrage/arbitrage.module';
+import { CcxtModule } from './ccxt/ccxt.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
