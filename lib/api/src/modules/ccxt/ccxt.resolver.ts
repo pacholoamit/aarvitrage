@@ -22,9 +22,4 @@ export class CcxtResolver {
   ): Promise<CcxtMarket[]> {
     return await this.ccxtService.findAllMarketsByExchange(exchangeId);
   }
-
-  //   @Query('coin')
-  //   findOne(@Args('id') id: number) {
-  //     return this.coinsService.findOne(id);
-  //   }
 }

@@ -4,11 +4,7 @@ import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import type { Exchange } from 'ccxt';
 import { CcxtDto } from './ccxt.dto';
 import { runPromise } from 'src/utils';
-import {
-  CcxtMarket,
-  EnumExchangeId,
-  ExchangeIds,
-} from 'src/entities/ccxt.entities';
+import { CcxtMarket, EnumExchangeId } from 'src/entities/ccxt.entities';
 
 @Injectable()
 export class CcxtService {
@@ -41,7 +37,7 @@ export class CcxtService {
     return currencies;
   }
 
-  public async findTickersByExchange({ exchangeId, tradePair }: CcxtDto) {
+  public async findTickerByExchange({ exchangeId, tradePair }: CcxtDto) {
     const exchange = new ccxt[exchangeId]();
     const context = `${exchangeId} ${tradePair}`;
 
