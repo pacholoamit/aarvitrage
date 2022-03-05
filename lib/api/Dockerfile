@@ -1,8 +1,8 @@
 FROM node:lts-alpine3.15
 
-WORKDIR /app
+ENV DATABASE_URL=postgresql://aarvitrage:aarvitrage@192.168.0.41:5432/aarvitrage?schema=public
 
-ENV DATABASE_URL postgresql://aarvitrage:aarvitrage@192.168.0.41:5432/aarvitrage?schema=public
+WORKDIR /app
 
 COPY package*.json yarn.lock ./
 
