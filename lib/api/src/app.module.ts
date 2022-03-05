@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ArbitrageModule } from './arbitrage/arbitrage.module';
 import { CcxtModule } from './ccxt/ccxt.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [CcxtModule, ArbitrageModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [CcxtModule, ArbitrageModule, PrismaModule],
 })
 export class AppModule {}

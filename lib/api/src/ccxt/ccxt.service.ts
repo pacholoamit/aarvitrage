@@ -1,6 +1,6 @@
 import * as ccxt from 'ccxt';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { CcxtDto } from './ccxt.dto';
+import { ExchangeIdDto, findTickerByExchangeDto } from './dto/ccxt.dto';
 import { handlePromise } from 'src/utils';
 @Injectable()
 export class CcxtService {
@@ -11,34 +11,24 @@ export class CcxtService {
     return ccxt.exchanges;
   }
 
-  public async findAllMarketsByExchange({
-    exchangeId,
-  }: CcxtDto): Promise<ccxt.Market[]> {
+  public async findAllMarketsByExchange({ exchangeId }: ExchangeIdDto): Promise<ccxt.Market[]> {
     const exchange = new ccxt[exchangeId]();
     const [markets, err] = await handlePromise(exchange.fetchMarkets());
 
     if (err || !markets) {
       this.logger.error('markets error: ' + err);
-      throw new HttpException(
-        'Market data not available',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException('Market data not available', HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return markets;
   }
 
-  public async findAllCurrenciesByExchange({
-    exchangeId,
-  }: CcxtDto): Promise<ccxt.Dictionary<ccxt.Currency>> {
+  public async findAllCurrenciesByExchange({ exchangeId }: ExchangeIdDto): Promise<ccxt.Dictionary<ccxt.Currency>> {
     const exchange = new ccxt[exchangeId]();
     const [currencies, err] = await handlePromise(exchange.fetchCurrencies());
 
     if (err || !currencies) {
       this.logger.error(err ?? 'currency error');
-      throw new HttpException(
-        'Currency data not available',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException('Currency data not available', HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     this.logger.log(`${exchangeId} currencies returned`);
@@ -46,10 +36,7 @@ export class CcxtService {
     return currencies;
   }
 
-  public async findTickerByExchange({
-    exchangeId,
-    tradePair,
-  }: CcxtDto): Promise<ccxt.Ticker> {
+  public async findTickerByExchange({ exchangeId, tradePair }: findTickerByExchangeDto): Promise<ccxt.Ticker> {
     const exchange = new ccxt[exchangeId]();
     const [ticker, err] = await handlePromise(exchange.fetchTicker(tradePair));
 
