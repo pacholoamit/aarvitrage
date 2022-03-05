@@ -1,5 +1,6 @@
 FROM node:lts-alpine3.15
 
+ENV VITE_API_URL='https://aarvitrage-api.arch-server.com'
 
 WORKDIR /app
 
