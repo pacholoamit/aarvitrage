@@ -1,9 +1,11 @@
 import { ExchangeId } from 'ccxt';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { EnumExchangeId } from './ccxt.enum';
 
 export class ExchangeIdDto {
   @IsNotEmpty()
   @IsString()
+  @IsEnum(EnumExchangeId)
   exchangeId: ExchangeId;
 }
 
