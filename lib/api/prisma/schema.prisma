@@ -16,4 +16,6 @@ model TradePair {
   name String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("TradePairs")
 }
