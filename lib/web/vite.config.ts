@@ -11,7 +11,7 @@ export default ({ mode }) => {
       port: 3000,
       https: false,
       hmr: {
-        host: process.env.DOMAIN_URL ?? "localhost",
+        host: process.env.DOMAIN_URL ?? "localhost", // Note: Test this
         port: 443,
         protocol: "wss",
       },

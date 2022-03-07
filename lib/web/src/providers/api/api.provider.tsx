@@ -16,9 +16,6 @@ const ApiProvider: React.FC = ({ children }) => {
     setArbitragePairResult(ticker.data);
   };
 
-  React.useEffect(() => {
-    console.log(apiUrl);
-  }, []);
   return (
     <ApiContext.Provider
       value={{

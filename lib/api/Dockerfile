@@ -12,6 +12,8 @@ COPY . .
 
 RUN npx prisma migrate deploy
 
+# RUN for i in 1 2 3 4 5; do npx prisma migrate deploy && break || sleep 15; done
+
 EXPOSE 4000
 
 CMD ["yarn", "run", "start:dev"]
