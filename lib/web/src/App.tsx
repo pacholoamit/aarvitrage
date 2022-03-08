@@ -1,17 +1,11 @@
-import { NavShell } from "./components";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ErrorPage, HomePage } from "./pages";
+import AppProvider from "./providers/app.provider";
+import AppRoutes from "./routes/app.routes";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <NavShell>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </NavShell>
-    </Router>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   );
 };
 
