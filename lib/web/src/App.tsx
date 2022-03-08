@@ -1,5 +1,4 @@
-import { Exchange, Footer, NavShell } from "./components";
-import { Grid } from "@mantine/core";
+import { NavShell } from "./components";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ErrorPage, HomePage } from "./pages";
 

@@ -1,3 +1,2 @@
-export { default as Exchange } from "./exchange.component";
-export { default as Footer } from "./footer.component";
-export { default as NavShell } from "./navshell/navshell.component";
+export { Footer } from "./footer";
+export { NavShell } from "./navshell";
