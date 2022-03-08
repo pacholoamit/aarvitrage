@@ -68,7 +68,7 @@ const NavShell: React.FC = ({ children }) => {
   );
 
   return (
-    <AppShell padding="sm" header={HeaderComponents} styles={Styles.appShell}>
+    <AppShell padding="xs" header={HeaderComponents} styles={Styles.appShell}>
       {children}
     </AppShell>
   );

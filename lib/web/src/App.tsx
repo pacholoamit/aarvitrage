@@ -1,19 +1,18 @@
 import { Exchange, Footer, NavShell } from "./components";
-import "./App.css";
 import { Grid } from "@mantine/core";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ErrorPage, HomePage } from "./pages";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <Router>
       <NavShell>
-        <Grid justify={"center"}>
-          <Grid.Col lg={9} md={12}>
-            <Exchange />
-            <Footer />
-          </Grid.Col>
-        </Grid>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
       </NavShell>
-    </div>
+    </Router>
   );
 };
 
